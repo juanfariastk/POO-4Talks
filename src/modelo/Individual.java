@@ -20,8 +20,28 @@ public class Individual extends Participante {
 	public boolean getAdministrador() {
 		return administrador;
 	}
+	
 	public ArrayList<Grupo> getGrupos(){
 		return grupos;
+	}
+	
+	public void adicionar(Grupo grup) {
+		grupos.add(grup);
+		grup.adicionar(this);
+	}
+	
+	public void remover(Grupo grup) {
+		grupos.remove(grup);
+		grup.remover(this);
+	}
+	
+	public Grupo localizarGrupo(String nome) {
+		for(Grupo grup : grupos) {
+			if(nome.equals(grup)) {
+				return grup;
+			}
+		}
+		return null;
 	}
 	
 	public void setSenha(String senha) {

@@ -37,8 +37,12 @@ public class Mensagem {
 		return datahora;
 	}
 	
-	public void setParticipante(Participante part) {
+	public void setRemetente(Participante part) {
 		emitente = part;
+	}
+	
+	public void setDestinatario(Participante part) {
+		destinatario = part;
 	}
 	
 }

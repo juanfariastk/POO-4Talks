@@ -21,8 +21,10 @@ public class Repositorio {
 		participantes.put(part.getNome(), part);
 	}
 	
-	public void adicionar(Mensagem m) {
-		mensagens.put(m.getId(), m);
+	public void adicionar(Mensagem mensag, Participante emitente, Participante destinatario ) {
+		mensagens.put(mensag.getId(), mensag);
+		emitente.adicionarEnviada(mensag);
+		destinatario.adicionarRecebida(mensag);
 	}
 	
 	public ArrayList<Individual> getIndividuos(){
@@ -45,6 +47,14 @@ public class Repositorio {
 		return grupos;
 	}
 	
+	public ArrayList<Mensagem> getMensagens(){
+		ArrayList<Mensagem> dadosMensagens = new ArrayList<>();
+		for(Mensagem men : mensagens.values()) {
+			dadosMensagens.add(men);
+		}
+		return dadosMensagens;
+	};
+	
 	public Individual localizarIndividual(String nome) {
 		for(Participante part : participantes.values()) {
 			if(part instanceof Individual) {
@@ -58,11 +68,31 @@ public class Repositorio {
 	
 	public Participante localizarParticipante(String nome) {
 		for(Participante part: participantes.values()) {
-			if(nome.equals(part.getNome())) {
-				return part;
+			if(part instanceof Individual)
+				if(nome.equals(part.getNome())) {
+					return part;
+				}
+		}
+		return null;
+	}
+	
+	public Participante localizarGrupo(String nome) {
+		for(Participante grup : participantes.values()) {
+			if(grup instanceof Grupo) {
+				if(nome.equals(grup.getNome())) {
+					return grup;
+				}
 			}
 		}
 		return null;
+	}
+	
+	public Mensagem localizarMensagem(int id) {
+		return mensagens.get(id);
+	}
+	
+	public void remover(Mensagem men) {
+		mensagens.remove(men.getId());
 	}
 	
 	public void carregarObjetos()  	{
@@ -150,7 +180,7 @@ public class Repositorio {
 				emitente = this.localizarParticipante(nomeemitente);
 				destinatario = this.localizarParticipante(nomedestinatario);
 				m = new Mensagem(Integer.parseInt(id),emitente,destinatario,texto);
-				this.adicionar(m);
+				this.adicionar(m, emitente, destinatario);
 			} 
 			arquivo3.close();
 		}
