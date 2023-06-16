@@ -45,4 +45,7 @@ public class Mensagem {
 		destinatario = part;
 	}
 	
+	public String toString() {
+		return "Emitente: " + this.emitente.getNome() + ", Destinatario =  " + this.destinatario.getNome() + " Data Hora: " + this.datahora + " Texto : " + this.texto; 
+	}
 }

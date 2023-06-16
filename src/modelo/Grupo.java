@@ -21,4 +21,21 @@ public class Grupo extends Participante {
 	public void remover(Individual ind) {
 		individuos.remove(ind);
 	}
+	
+	public Individual localizarIndividuo(String nome) {
+		for(Individual ind: individuos) {
+			if(nome.equals(ind.getNome())) {
+				return ind;
+			}
+		}
+		return null;
+	}
+	
+	public boolean isMembro(String nome) {
+	    return localizarIndividuo(nome) != null;
+	}
+	
+	public String toString() {
+		return "Nome do grupo: " + this.getNome() ;
+	}
 }

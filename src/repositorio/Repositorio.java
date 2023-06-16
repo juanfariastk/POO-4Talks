@@ -76,11 +76,11 @@ public class Repositorio {
 		return null;
 	}
 	
-	public Participante localizarGrupo(String nome) {
+	public Grupo localizarGrupo(String nome) {
 		for(Participante grup : participantes.values()) {
 			if(grup instanceof Grupo) {
 				if(nome.equals(grup.getNome())) {
-					return grup;
+					return (Grupo) grup;
 				}
 			}
 		}

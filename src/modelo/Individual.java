@@ -11,6 +11,7 @@ public class Individual extends Participante {
 		super(nome);
 		this.senha = senha;
 		administrador = admin;
+		grupos = new ArrayList<>();
 	}
 	
 	public String getSenha() {
@@ -37,7 +38,7 @@ public class Individual extends Participante {
 	
 	public Grupo localizarGrupo(String nome) {
 		for(Grupo grup : grupos) {
-			if(nome.equals(grup)) {
+			if(nome.equals(grup.getNome())) {
 				return grup;
 			}
 		}
