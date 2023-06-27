@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Mensagem {
 	private int id;
 	private String texto;
@@ -46,6 +47,6 @@ public class Mensagem {
 	}
 	
 	public String toString() {
-		return "Emitente: " + this.emitente.getNome() + ", Destinatario =  " + this.destinatario.getNome() + " Data Hora: " + this.datahora + " Texto : " + this.texto; 
+		return "ID : " + id + ", Emitente: " + this.emitente.getNome() + ", Destinatario =  " + this.destinatario.getNome() + " Data Hora: " + datahora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " Texto : " + this.texto; 
 	}
 }

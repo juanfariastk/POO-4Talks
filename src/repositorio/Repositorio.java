@@ -21,7 +21,7 @@ public class Repositorio {
 		participantes.put(part.getNome(), part);
 	}
 	
-	public void adicionar(Mensagem mensag, Participante emitente, Participante destinatario ) {
+	public void adicionarMensagem(Mensagem mensag, Participante emitente, Participante destinatario ) {
 		mensagens.put(mensag.getId(), mensag);
 		emitente.adicionarEnviada(mensag);
 		destinatario.adicionarRecebida(mensag);
@@ -56,24 +56,16 @@ public class Repositorio {
 	};
 	
 	public Individual localizarIndividual(String nome) {
-		for(Participante part : participantes.values()) {
-			if(part instanceof Individual) {
-				if(nome.equals(part.getNome())) {
-					return (Individual) part;
-				}
-			}
+		Participante p = participantes.get(nome);
+		if (p instanceof Individual) {
+			Individual ind = (Individual) p;
+			return ind;
 		}
 		return null;
 	}
 	
 	public Participante localizarParticipante(String nome) {
-		for(Participante part: participantes.values()) {
-			if(part instanceof Individual)
-				if(nome.equals(part.getNome())) {
-					return part;
-				}
-		}
-		return null;
+		return participantes.get(nome);
 	}
 	
 	public Grupo localizarGrupo(String nome) {
@@ -180,7 +172,7 @@ public class Repositorio {
 				emitente = this.localizarParticipante(nomeemitente);
 				destinatario = this.localizarParticipante(nomedestinatario);
 				m = new Mensagem(Integer.parseInt(id),emitente,destinatario,texto);
-				this.adicionar(m, emitente, destinatario);
+				this.adicionarMensagem(m, emitente, destinatario);
 			} 
 			arquivo3.close();
 		}

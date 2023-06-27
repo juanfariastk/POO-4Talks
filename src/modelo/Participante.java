@@ -25,14 +25,26 @@ public class Participante {
 	}
 	
 	public Mensagem localizarEnviada(int ID) {
-		return enviadas.get(ID);
+		for (Mensagem m : enviadas) {
+			if(m.getId() == ID)
+				return m;
+		}
+		return null;
 	}
 	
 	public Mensagem localizarRecebida(int ID) {
-		return recebidas.get(ID);
+		for (Mensagem m : recebidas) {
+			if(m.getId() == ID)
+				return m;
+		}
+		return null;
 	}
 	
 	public void removerEnviada(int ID) {
+		enviadas.remove(ID);
+	}
+	
+	public void removerRecebida(int ID) {
 		recebidas.remove(ID);
 	}
 	
@@ -52,7 +64,30 @@ public class Participante {
 		recebidas.remove(mensag);
 	}
 	
+	@Override
 	public String toString() {
-		return "Nome do participante: " + nome + " | Mensagens recebidas: " + recebidas + " | Mensagens enviadas: " + enviadas; 
+		String s = " -- Nome = " + nome + "\n Mensagens enviadas: ";
+		
+		if(enviadas.isEmpty())
+			s += " Sem mensagens enviadas \n";
+		
+		else {
+			for(Mensagem m : enviadas) {
+				s += "\n  -> " + m;
+			}
+			s += "\n ";
+		}
+		
+		s += " Mensagens recebidas: ";
+		
+		if(recebidas.isEmpty())
+			s += "Sem mensagens recebidas";
+		
+		else {
+			for(Mensagem m : recebidas) {
+				s += "\n  -> " + m;
+			}
+		}
+		return s;
 	}
 }

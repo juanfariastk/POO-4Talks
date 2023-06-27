@@ -15,7 +15,6 @@ public class Grupo extends Participante {
 	
 	public void adicionar(Individual ind) {
 		individuos.add(ind);
-		ind.adicionar(this);
 	}
 	
 	public void remover(Individual ind) {

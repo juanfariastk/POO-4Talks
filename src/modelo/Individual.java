@@ -28,7 +28,6 @@ public class Individual extends Participante {
 	
 	public void adicionar(Grupo grup) {
 		grupos.add(grup);
-		grup.adicionar(this);
 	}
 	
 	public void remover(Grupo grup) {
@@ -45,8 +44,32 @@ public class Individual extends Participante {
 		return null;
 	}
 	
+	public boolean verificarGrupo(String nome) {
+		for (Grupo g : grupos) {
+			if(g.getNome().equals(nome))
+				return true;
+		}
+		return false;
+	}
+	
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	@Override
+	public String toString() {
+		String s = super.toString() + "\n Grupos do participante: ";
+		
+		if(grupos.isEmpty())
+			s += "sem grupo";
+		
+		else {
+			for(Grupo g : grupos) {
+				s += "\n  --  " + g.getNome();
+			}
+		}
+		return s;
+	}
+
 	
 }
