@@ -4,7 +4,6 @@ package testes;
  * IFPB - TSI - POO 
  * Prof. Fausto Ayres
  *
- * Teste do sistema 4TALK
  */
 
 import java.util.ArrayList;

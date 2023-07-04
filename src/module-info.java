@@ -6,4 +6,5 @@
  *
  */
 module Projeto4Talks {
+	requires java.desktop;
 }

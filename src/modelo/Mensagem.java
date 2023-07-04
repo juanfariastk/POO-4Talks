@@ -2,51 +2,76 @@ package modelo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-public class Mensagem {
+
+public class Mensagem implements Comparable <Mensagem> {
+
 	private int id;
 	private String texto;
 	private Participante emitente;
 	private Participante destinatario;
 	private LocalDateTime datahora;
 	
-	
-	public Mensagem(int id,  Participante emissor, Participante destinatario,String msg) {
+	public Mensagem(int id, Participante emitente, Participante destinatario, String texto, LocalDateTime dataHora) {
 		this.id = id;
-		texto = msg;
-		emitente = emissor;
+		this.texto = texto;
+		this.emitente = emitente;
 		this.destinatario = destinatario;
-		datahora = LocalDateTime.now();
+		this.datahora = dataHora;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getTexto() {
 		return texto;
 	}
-	
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
 	public Participante getEmitente() {
 		return emitente;
 	}
-	
+
+	public void setEmitente(Individual emitente) {
+		this.emitente = emitente;
+	}
+
 	public Participante getDestinatario() {
 		return destinatario;
 	}
-	
-	public LocalDateTime getDataHora() {
-		return datahora;
+
+	public void setDestinatario(Participante destinatario) {
+		this.destinatario = destinatario;
+	}
+
+	public String getData() {
+		return this.datahora.format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss"));
+	}
+
+	public void setData(String datahora) {
+		this.datahora = LocalDateTime.parse(datahora, DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss"));
 	}
 	
-	public void setRemetente(Participante part) {
-		emitente = part;
-	}
-	
-	public void setDestinatario(Participante part) {
-		destinatario = part;
-	}
-	
+	@Override
 	public String toString() {
-		return "ID : " + id + ", Emitente: " + this.emitente.getNome() + ", Destinatario =  " + this.destinatario.getNome() + " Data Hora: " + datahora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " Texto : " + this.texto; 
+		return "id= " + id + ", emitente = " + emitente.getNome() + " , destinatario = " + destinatario.getNome() + ", datahora = " + datahora + " " + ", texto = " + texto ;
 	}
+
+	@Override
+	public int compareTo(Mensagem outraMsg) {
+		if (this.id < outraMsg.id)
+			return -1;
+		else if (this.id > outraMsg.id)
+			return 1;
+		else
+			return 0;
+	}
+	
 }
